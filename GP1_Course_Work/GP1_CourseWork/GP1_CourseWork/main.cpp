@@ -22,8 +22,9 @@ static cD3DManager* d3dMgr = cD3DManager::getInstance();
 // Get a reference to the DirectX Sprite renderer Manager 
 static cD3DXSpriteMgr* d3dxSRMgr = cD3DXSpriteMgr::getInstance();
 	
+float rot = 0.0f;
 D3DXVECTOR2 rocketTrans = D3DXVECTOR2(300,300);
-
+D3DXVECTOR2 rocketScale = D3DXVECTOR2(1.0f, 1.0f);
 
 /*
 ==================================================================
@@ -41,29 +42,33 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			{
 				if (wParam == VK_LEFT)
 				{
-					rocketTrans.x -= 5.0f;
+					rot -= D3DXToRadian(15.0f);
 					return 0;
 				}
 				if (wParam == VK_RIGHT)
 				{
-					rocketTrans.x += 5.0f;
+					rot += D3DXToRadian(15.0f);
 					return 0;
 				}
 					if (wParam == VK_UP)
 				{
-					rocketTrans.y -= 5.0f;
+					rocketScale += D3DXVECTOR2(0.5f,0.5f);
 					return 0;
 				}
 				if (wParam == VK_DOWN)
 				{
-					rocketTrans.y += 5.0f;
+					rocketScale -= D3DXVECTOR2(0.5f,0.5f);
 					return 0;
 				}
-				if (wParam == VK_DELETE)
+				if (wParam == 'A')
 				{
-			
-
-				return 0;
+					rocketTrans.x -= 5.0f;
+					return 0;
+				}
+				if (wParam == 'S')
+				{
+					rocketTrans.x += 5.0f;
+					return 0;
 				}
 				return 0;
 			}
@@ -152,9 +157,12 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLi
 	
 	// Initial starting position for Rocket
 	D3DXVECTOR3 rocketPos = D3DXVECTOR3(300,300,0);
-	cSprite theRocket(rocketPos,d3dMgr->getTheD3DDevice(),"Images\\Gradius_Ship.png");
+	cSprite theRocket(rocketPos,d3dMgr->getTheD3DDevice(),"Images\\rocketSprite.png");
 
 	theRocket.SetTranslation(D3DXVECTOR2(5.0f,0.0f));
+
+	//Build our matrix to rotate, scale and position our sprite
+	D3DXMATRIX transformMatrix;
 
 	MSG msg;
 	ZeroMemory( &msg, sizeof( msg ) );
@@ -172,21 +180,17 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLi
 		}
 		else
 		{
-			// Game code goes here
-			if(rocketTrans.x > 0 && rocketTrans.x < 736 && rocketTrans.y > 0 && rocketTrans.y < 600-128)
-		{
-			rocketPos = D3DXVECTOR3(rocketTrans.x,rocketTrans.y,0);
-		}	
-
-			theRocket.setSpritePos(rocketPos);
 			
+			D3DXMatrixTransformation2D(&transformMatrix, NULL, 0.0f, &rocketScale, &(theRocket.getSpriteCentre()), rot, &rocketTrans);
+
 			d3dMgr->beginRender();
 			theBackbuffer = d3dMgr->getTheBackBuffer();
 			d3dMgr->updateTheSurface(aSurface, theBackbuffer);
 			d3dMgr->releaseTheBackbuffer(theBackbuffer);
 			
 			d3dxSRMgr->beginDraw();
-			d3dxSRMgr->drawSprite(theRocket.getTexture(),NULL,NULL,&theRocket.getSpritePos(),0xFFFFFFFF);
+			d3dxSRMgr->setTheTransform(transformMatrix);
+			d3dxSRMgr->drawSprite(theRocket.getTexture(),NULL,NULL,NULL,0xFFFFFFFF);
 			d3dxSRMgr->endDraw();
 			d3dMgr->endRender();
 		}
