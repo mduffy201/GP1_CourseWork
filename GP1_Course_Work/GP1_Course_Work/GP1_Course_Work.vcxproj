@@ -11,8 +11,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{4B952AA7-27B5-483B-868B-257B2274917E}</ProjectGuid>
-    <RootNamespace>GP1_CourseWork</RootNamespace>
+    <ProjectGuid>{8FDDCFD6-82DF-4E9C-B675-D5FFC38E4F7D}</ProjectGuid>
+    <RootNamespace>GP1_Course_Work</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -38,16 +38,12 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>
-      </AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -71,15 +67,25 @@
     <ClInclude Include="cD3DManager.h" />
     <ClInclude Include="cD3DXSpriteMgr.h" />
     <ClInclude Include="cD3DXTexture.h" />
+    <ClInclude Include="cEnemy.h" />
+    <ClInclude Include="cPlayer.h" />
+    <ClInclude Include="cShot.h" />
     <ClInclude Include="cSprite.h" />
     <ClInclude Include="GameConstants.h" />
+    <ClInclude Include="GameResources.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cD3DManager.cpp" />
     <ClCompile Include="cD3DXSpriteMgr.cpp" />
     <ClCompile Include="cD3DXTexture.cpp" />
+    <ClCompile Include="cEnemy.cpp" />
+    <ClCompile Include="cPlayer.cpp" />
+    <ClCompile Include="cShot.cpp" />
     <ClCompile Include="cSprite.cpp" />
     <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="GameResources.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

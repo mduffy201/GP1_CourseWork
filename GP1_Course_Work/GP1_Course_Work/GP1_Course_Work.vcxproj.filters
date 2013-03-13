@@ -15,6 +15,12 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="cPlayer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cEnemy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="cD3DXSpriteMgr.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -27,11 +33,26 @@
     <ClInclude Include="GameConstants.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="GameResources.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="cD3DManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cShot.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="cPlayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cEnemy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cD3DXSpriteMgr.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="cD3DXTexture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -44,8 +65,13 @@
     <ClCompile Include="cD3DManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="cD3DXSpriteMgr.cpp">
+    <ClCompile Include="cShot.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="GameResources.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>
