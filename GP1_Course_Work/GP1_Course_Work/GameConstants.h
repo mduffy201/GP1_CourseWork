@@ -5,6 +5,8 @@
 #include <windows.h>
 #include <d3d9.h>
 #include <d3dx9.h>
+#include <xaudio2.h>
+#include "SDKwavefile.h"
 
 #include <iostream>
 #include <string>
@@ -13,10 +15,13 @@
 #include <algorithm>
 #include <ctime>
 #include <cstdlib>
+#include <stdio.h>
+#include <strsafe.h>
 
 using namespace std;
 // This header file contains all the constants & enumarated types for the game
 
 enum eDirection {LEFT, RIGHT, UP, DOWN};
+enum eShooter {PLAYER,CPU};
 
 #endif

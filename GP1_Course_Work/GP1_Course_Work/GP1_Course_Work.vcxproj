@@ -37,7 +37,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Samples\C++\DXUT\Optional;C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Samples\C++\DXUT\Core;C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -47,7 +47,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>d3d9.lib;d3dx9.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d9.lib;d3dx9.lib;DXUTOpt.lib;winmm.lib;dxerr.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -64,24 +64,36 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="cBackground.h" />
     <ClInclude Include="cD3DManager.h" />
+    <ClInclude Include="cD3DXFont.h" />
     <ClInclude Include="cD3DXSpriteMgr.h" />
     <ClInclude Include="cD3DXTexture.h" />
     <ClInclude Include="cEnemy.h" />
+    <ClInclude Include="cEnemyWave.h" />
+    <ClInclude Include="cExplosion.h" />
     <ClInclude Include="cPlayer.h" />
     <ClInclude Include="cShot.h" />
     <ClInclude Include="cSprite.h" />
+    <ClInclude Include="cStage.h" />
+    <ClInclude Include="cXAudio.h" />
     <ClInclude Include="GameConstants.h" />
     <ClInclude Include="GameResources.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="cBackground.cpp" />
     <ClCompile Include="cD3DManager.cpp" />
+    <ClCompile Include="cD3DXFont.cpp" />
     <ClCompile Include="cD3DXSpriteMgr.cpp" />
     <ClCompile Include="cD3DXTexture.cpp" />
     <ClCompile Include="cEnemy.cpp" />
+    <ClCompile Include="cEnemyWave.cpp" />
+    <ClCompile Include="cExplosion.cpp" />
     <ClCompile Include="cPlayer.cpp" />
     <ClCompile Include="cShot.cpp" />
     <ClCompile Include="cSprite.cpp" />
+    <ClCompile Include="cStage.cpp" />
+    <ClCompile Include="cXAudio.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>

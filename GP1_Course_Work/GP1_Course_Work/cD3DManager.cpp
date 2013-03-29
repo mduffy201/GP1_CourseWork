@@ -136,7 +136,7 @@ LPDIRECT3DSURFACE9 cD3DManager::getD3DSurfaceFromFile(LPCSTR theFilename) // cre
 	// Check the return value to make sure that this function call was successful
 	if (FAILED(hResult))
 		return false;
-
+	
 	hResult = D3DXLoadSurfaceFromFile(surface,NULL,NULL,theFilename,NULL,
 										D3DX_DEFAULT,0,NULL);
 	if ( FAILED(hResult))
