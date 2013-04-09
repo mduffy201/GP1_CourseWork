@@ -60,12 +60,6 @@
     <ClInclude Include="cEnemyWave.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="cHighScore.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="cXboxController.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cPlayer.cpp">
@@ -108,12 +102,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="cEnemyWave.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="cHighScore.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="cXboxController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -6,7 +6,6 @@
 #include <d3d9.h>
 #include <d3dx9.h>
 #include <xaudio2.h>
-#include <XInput.h>
 #include "SDKwavefile.h"
 
 #include <iostream>
