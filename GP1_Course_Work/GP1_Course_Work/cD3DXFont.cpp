@@ -91,7 +91,7 @@ HRESULT cD3DXFont::createDXFont(LPDIRECT3DDEVICE9 theDevice)	// Create the DX Fo
 	mFontDesc.PitchAndFamily = DEFAULT_PITCH;
 	
 	//mFontDesc.FaceName = "JI Balloon Caps";
-	strcpy_s(mFontDesc.FaceName, 32, "visitor1");
+	strcpy_s(mFontDesc.FaceName, 32, "staravenue");
 
 	if (FAILED(D3DXCreateFontIndirect(theDevice, &mFontDesc, &mFont)))
 	{
@@ -107,6 +107,6 @@ HRESULT cD3DXFont::createDXFont(LPDIRECT3DDEVICE9 theDevice)	// Create the DX Fo
 */
 void cD3DXFont::printText(LPCSTR string, RECT pos)				// Draw the text onto the screen.
 {
-
+	
 	mFont->DrawText(NULL, string,  -1, &pos, DT_LEFT, 0xffffffcc);
 }

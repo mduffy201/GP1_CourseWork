@@ -1,22 +1,24 @@
 #include "cEnemy.h"
 
 LPCSTR enemySprite = "Images\\EnemyShip1.png";
-const float SHIP_SPEED = 5.0f;
+//const float SHIP_SPEED = 5.0f;
+//const int fireRate = 50;
 vector<cShot*>	eShots;
 int counter = 0;
 cEnemy::cEnemy():cSprite()
 {
 
 }
-cEnemy::cEnemy(int ID, D3DXVECTOR3 sPosition, LPDIRECT3DDEVICE9 pd3dDevice): cSprite(sPosition,pd3dDevice,enemySprite)
+cEnemy::cEnemy(int ID,float speed, int fireRate, D3DXVECTOR3 sPosition, LPDIRECT3DDEVICE9 pd3dDevice): cSprite(sPosition,pd3dDevice,enemySprite)
 
 {
 	mID = ID;
 	mPoints= 0;
-	mSpeed = SHIP_SPEED;
+	//mSpeed = SHIP_SPEED;
 	mActive = true;
 	mShooter = eShooter::CPU;
-	
+	shipSpeed = speed;
+	rateOfFire = fireRate;
 	/*switch(mID){
 	case 0:
 		
@@ -35,35 +37,35 @@ void cEnemy::update(LPDIRECT3DDEVICE9 pd3dDevice, vector<cShot*> &gShots)
 	case 0:
 		//HORIZONTAL (RIGHT TO LEFT)
 	tempV2 = cEnemy::getSpritePos2D() + cEnemy::getTranslation();
-	tempV3 = D3DXVECTOR3(tempV2.x - SHIP_SPEED, tempV2.y, 0.0f);
+	tempV3 = D3DXVECTOR3(tempV2.x - shipSpeed, tempV2.y, 0.0f);
 	cEnemy::setSpritePos(tempV3);
 	cSprite::update();
 	break;
 	case 1:
 		//VERTICAL (BOTTOM TO TOP)
 	tempV2 = cEnemy::getSpritePos2D() + cEnemy::getTranslation();
-	tempV3 = D3DXVECTOR3(tempV2.x , tempV2.y- SHIP_SPEED, 0.0f);
+	tempV3 = D3DXVECTOR3(tempV2.x , tempV2.y- shipSpeed, 0.0f);
 	cEnemy::setSpritePos(tempV3);
 	cSprite::update();
 		break;
 			case 2:
 				//VERTICAL (TOP TO BOTTOM)
 	tempV2 = cEnemy::getSpritePos2D() + cEnemy::getTranslation();
-	tempV3 = D3DXVECTOR3(tempV2.x , tempV2.y + SHIP_SPEED, 0.0f);
+	tempV3 = D3DXVECTOR3(tempV2.x , tempV2.y + shipSpeed, 0.0f);
 	cEnemy::setSpritePos(tempV3);
 	cSprite::update();
 		break;
 				case 3:
 					//DIAGONAL (top right to down left)
 	tempV2 = cEnemy::getSpritePos2D() + cEnemy::getTranslation();
-	tempV3 = D3DXVECTOR3(tempV2.x - SHIP_SPEED , tempV2.y + SHIP_SPEED, 0.0f);
+	tempV3 = D3DXVECTOR3(tempV2.x - shipSpeed , tempV2.y + shipSpeed, 0.0f);
 	cEnemy::setSpritePos(tempV3);
 	cSprite::update();
 		break;
 			case 4:
 					//DIAGONAL (bottom right to up left)
 	tempV2 = cEnemy::getSpritePos2D() + cEnemy::getTranslation();
-	tempV3 = D3DXVECTOR3(tempV2.x - SHIP_SPEED , tempV2.y - SHIP_SPEED, 0.0f);
+	tempV3 = D3DXVECTOR3(tempV2.x - shipSpeed , tempV2.y - shipSpeed, 0.0f);
 	cEnemy::setSpritePos(tempV3);
 	cSprite::update();
 		break;
@@ -71,11 +73,11 @@ void cEnemy::update(LPDIRECT3DDEVICE9 pd3dDevice, vector<cShot*> &gShots)
 		//Forward then up
 	tempV2 = cEnemy::getSpritePos2D() + cEnemy::getTranslation();
 	if(tempV2.x > 400){
-	tempV3 = D3DXVECTOR3(tempV2.x - SHIP_SPEED, tempV2.y, 0.0f);
+	tempV3 = D3DXVECTOR3(tempV2.x - shipSpeed, tempV2.y, 0.0f);
 	}
 	else
 	{
-	tempV3 = D3DXVECTOR3(tempV2.x , tempV2.y- SHIP_SPEED, 0.0f);
+	tempV3 = D3DXVECTOR3(tempV2.x , tempV2.y- shipSpeed, 0.0f);
 	}
 	cEnemy::setSpritePos(tempV3);
 	cSprite::update();
@@ -84,39 +86,24 @@ void cEnemy::update(LPDIRECT3DDEVICE9 pd3dDevice, vector<cShot*> &gShots)
 		//Forward then down
 	tempV2 = cEnemy::getSpritePos2D() + cEnemy::getTranslation();
 	if(tempV2.x > 400){
-	tempV3 = D3DXVECTOR3(tempV2.x - SHIP_SPEED, tempV2.y, 0.0f);
+	tempV3 = D3DXVECTOR3(tempV2.x - shipSpeed, tempV2.y, 0.0f);
 	}
 	else
 	{
-	tempV3 = D3DXVECTOR3(tempV2.x , tempV2.y + SHIP_SPEED, 0.0f);
+	tempV3 = D3DXVECTOR3(tempV2.x , tempV2.y + shipSpeed, 0.0f);
 	}
 	cEnemy::setSpritePos(tempV3);
 	cSprite::update();
 	break;
 	}
 
-	if(counter == 50)
+	if(counter == rateOfFire)
 	{
 		cEnemy::fire(pd3dDevice, gShots);
 		counter = 0;
 	}
 
-	/*vector<cShot*>::iterator iter;
 
-	while(iter != eShots.end())
-				{
-					if((*iter)->isActive() == false)
-					{
-						iter = gShots.erase(iter);
-					}
-					else
-					{
-						(*iter)->update(dt);
-						d3dxSRMgr->setTheTransform((*iter)->getSpriteTransformMatrix());  
-						d3dxSRMgr->drawSprite((*iter)->getTexture(),NULL,NULL,NULL,0xFFFFFFFF);
-						iter++;
-					}
-				}*/
 }
 void cEnemy::fire(LPDIRECT3DDEVICE9 pd3dDevice, vector<cShot*> &gShots)
 {
@@ -146,13 +133,9 @@ bool cEnemy::isActive() 						// Determine if the sprite is active.
 {
 	return mActive;
 }
-/*list<cEnemy*> getShips(list<cEnemy*> eShips, RECT clientBounds, LPDIRECT3DDEVICE9 pd3dDevice){
-
-		for(int i = 0; i<3; i++)
-	{
-		D3DXVECTOR3 ePos = D3DXVECTOR3(clientBounds.right-40+(i*40),clientBounds.bottom/2,0);
-		eShips.push_back(new cEnemy(ePos, pd3dDevice));
-	}
-	
-	return eShips;
+/*void cEnemy::setRateOfFire(int rate){
+	rateOfFire = rate;
+}
+void cEnemy::setShipSpeed(float speed){
+shipSpeed = speed;
 }*/

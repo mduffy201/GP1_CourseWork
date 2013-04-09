@@ -59,13 +59,15 @@ cXAudio::~cXAudio()
 - Play sound.
 =================
 */
-void cXAudio::playSound(LPWSTR theFilename, bool pLoop )					// Play sound
+void cXAudio::playSound(LPWSTR theFilename, bool pLoop)					// Play sound
 {
 	HRESULT hResult;
 	CWaveFile wavFile;
-
+	
+	
 	wavFile.Open( theFilename, NULL, WAVEFILE_READ );
-    // Get format of wave file
+	
+	// Get format of wave file
     WAVEFORMATEX* pwfx = wavFile.GetFormat();
 
     // Calculate how many bytes and samples are in the wave
@@ -97,5 +99,11 @@ void cXAudio::playSound(LPWSTR theFilename, bool pLoop )					// Play sound
 	{
 		mSourceVoice->SubmitSourceBuffer(&buffer);
 		mSourceVoice->Start(0, XAUDIO2_COMMIT_NOW );
+	
 	}
+	
+}
+void cXAudio::stopSound()
+{
+	mSourceVoice->Stop();
 }
