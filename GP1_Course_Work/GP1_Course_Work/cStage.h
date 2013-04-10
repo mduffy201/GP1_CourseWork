@@ -12,9 +12,9 @@ private:
 	int rateOfFire;
 	float speed;
 public:
-	cStage();
-	void Update(list<cEnemy*> &eShips,RECT clientBounds,LPDIRECT3DDEVICE9 pd3dDevice);
-	bool isActive();
-	void startLevel();
+	cStage();   //Constructor
+	void Update(list<cEnemy*> &eShips,RECT clientBounds,LPDIRECT3DDEVICE9 pd3dDevice);    //Update satge, introduce enemy waves
+	bool isActive();   //Check if active
+	void startLevel();     //Initialise level
 };
 #endif

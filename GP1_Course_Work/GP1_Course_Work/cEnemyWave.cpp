@@ -74,9 +74,3 @@ list<cEnemy*> cEnemyWave::makeWave(float speed,int fireRate,RECT clientBounds,LP
 	return mWave;
 
 }
-/*void cEnemy::setRateOfFire(int rate){
-	rateOfFire = rate;
-}
-void cEnemy::setShipSpeed(float speed){
-shipSpeed = speed;
-}*/

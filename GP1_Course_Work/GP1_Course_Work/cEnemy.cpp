@@ -1,8 +1,7 @@
 #include "cEnemy.h"
 
 LPCSTR enemySprite = "Images\\EnemyShip1.png";
-//const float SHIP_SPEED = 5.0f;
-//const int fireRate = 50;
+
 vector<cShot*>	eShots;
 int counter = 0;
 cEnemy::cEnemy():cSprite()
@@ -13,17 +12,11 @@ cEnemy::cEnemy(int ID,float speed, int fireRate, D3DXVECTOR3 sPosition, LPDIRECT
 
 {
 	mID = ID;
-	mPoints= 0;
-	//mSpeed = SHIP_SPEED;
 	mActive = true;
 	mShooter = eShooter::CPU;
 	shipSpeed = speed;
 	rateOfFire = fireRate;
-	/*switch(mID){
-	case 0:
-		
-		break;
-	}*/
+	
 }
 void cEnemy::update(LPDIRECT3DDEVICE9 pd3dDevice, vector<cShot*> &gShots)
 {
@@ -119,10 +112,7 @@ void cEnemy::setActive(bool sActive) 			// Set the sprite to active.
 {
 	mActive = sActive;
 }
-vector<cShot*>	getShots()
-{
-	return eShots;
-}
+
 
 /*
 =================
@@ -133,9 +123,3 @@ bool cEnemy::isActive() 						// Determine if the sprite is active.
 {
 	return mActive;
 }
-/*void cEnemy::setRateOfFire(int rate){
-	rateOfFire = rate;
-}
-void cEnemy::setShipSpeed(float speed){
-shipSpeed = speed;
-}*/

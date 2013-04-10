@@ -64,14 +64,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="cBackground.h" />
     <ClInclude Include="cD3DManager.h" />
     <ClInclude Include="cD3DXFont.h" />
     <ClInclude Include="cD3DXSpriteMgr.h" />
     <ClInclude Include="cD3DXTexture.h" />
     <ClInclude Include="cEnemy.h" />
     <ClInclude Include="cEnemyWave.h" />
-    <ClInclude Include="cExplosion.h" />
     <ClInclude Include="cHighScore.h" />
     <ClInclude Include="cPlayer.h" />
     <ClInclude Include="cShot.h" />
@@ -83,14 +81,12 @@
     <ClInclude Include="GameResources.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="cBackground.cpp" />
     <ClCompile Include="cD3DManager.cpp" />
     <ClCompile Include="cD3DXFont.cpp" />
     <ClCompile Include="cD3DXSpriteMgr.cpp" />
     <ClCompile Include="cD3DXTexture.cpp" />
     <ClCompile Include="cEnemy.cpp" />
     <ClCompile Include="cEnemyWave.cpp" />
-    <ClCompile Include="cExplosion.cpp" />
     <ClCompile Include="cHighScore.cpp" />
     <ClCompile Include="cPlayer.cpp" />
     <ClCompile Include="cShot.cpp" />

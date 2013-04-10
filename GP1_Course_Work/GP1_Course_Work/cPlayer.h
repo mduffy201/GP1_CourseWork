@@ -8,30 +8,23 @@
 class cPlayer: public cSprite{
 
 private:
-	int mScore;
-	int mLives;
+
 	float mSpeed;
 	vector<cShot*> gShots;
 	eShooter mShooter;
 	bool bActive;
 public:
-	//constructor
-	cPlayer();
+	
+	cPlayer(); //constructor
 	cPlayer(D3DXVECTOR3 sPosition, LPDIRECT3DDEVICE9 pd3dDevice);
-	void update();	
-	void moveUp();
-	void moveDown();
-	void moveLeft();
-	void moveRight();
-	void fire(vector<cShot*> &gShots, LPDIRECT3DDEVICE9 pd3dDevice);
-
-	//void fire(LPDIRECT3DDEVICE9 pd3dDevice);
-	float getSpeed();
-	void Draw(cD3DXSpriteMgr* d3dxSRMgr,float dt);
-	vector<cShot*> getShots();
-	void setShots(vector<cShot*> &gShots);
-	void Death();
-	bool isActive();
-	void Respawn();
+	void update();	  //Update player position
+	void moveUp();   //Move player up
+	void moveDown();    //Move player down
+	void moveLeft();   // Move player left
+	void moveRight();   //Mover player right
+	void fire(vector<cShot*> &gShots, LPDIRECT3DDEVICE9 pd3dDevice);    // Add new shot to collection
+	void Death();     // Kill player
+	bool isActive();    //Check if active
+	void Respawn();    //Respawn player
 };
 #endif

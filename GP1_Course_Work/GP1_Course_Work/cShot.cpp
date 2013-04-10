@@ -56,9 +56,3 @@ bool cShot::isActive() 						// Determine if the sprite is active.
 {
 	return mActive;
 }
- void Draw(cD3DXSpriteMgr* d3dxSRMgr)
-{
-	
-	//d3dxSRMgr->setTheTransform(cShot::getSpriteTransformMatrix());  
-				//	d3dxSRMgr->drawSprite(cShot::getTexture(),NULL,NULL,NULL,0xFFFFFFFF);
-}

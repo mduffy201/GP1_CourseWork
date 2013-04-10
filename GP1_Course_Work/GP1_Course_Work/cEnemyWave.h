@@ -8,13 +8,10 @@ class cEnemyWave{
 
 private:
 	int mID;
-	//int rateOfFire;
-//	float shipSpeed;
-	list<cEnemy*> makeWave(float speed,int fireRate,RECT clientBounds,LPDIRECT3DDEVICE9 pd3dDevice);
+	list<cEnemy*> makeWave(float speed,int fireRate,RECT clientBounds,LPDIRECT3DDEVICE9 pd3dDevice);    //Construct wave of enemies
 public:
-	cEnemyWave(int ID,float speed,int fireRate,RECT clientBounds,LPDIRECT3DDEVICE9 pd3dDevice);
-	list<cEnemy*> mWave;
-		void setRateOfFire(int rate);
-	void setShipSpeed(float speed);
+	cEnemyWave(int ID,float speed,int fireRate,RECT clientBounds,LPDIRECT3DDEVICE9 pd3dDevice);   //Constructor
+	list<cEnemy*> mWave;   //collection of enemies
+
 };
 #endif

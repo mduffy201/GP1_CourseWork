@@ -14,7 +14,6 @@ Main entry point for the Card application
 #include "cSprite.h"
 #include "cPlayer.h"
 #include "cEnemy.h"
-#include "cBackground.h"
 #include "cShot.h"
 #include "cStage.h"
 #include "cXAudio.h"
@@ -63,11 +62,7 @@ int menuCounterDown = 10;
 int menuCounterRight = 10;
 int menuCounterLeft = 10;
 int deathCounter = 0;
-//================================================background
-cBackground background1;
-//cBackground background2;
-D3DXVECTOR3 backPos;
-//D3DXVECTOR3 backPos2;
+
 
 //===========================================Text
 char gScoreStr[50];
@@ -246,12 +241,19 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			}
 			if (wParam == VK_SPACE)
 			{
-				if(!menu)
+			
+				if(!menu && !hScore && !newHScore && !lvComp  && !controls)
 				{
 					//Add single shot to shot collection
 					theShip.fire(gShots, d3dMgr->getTheD3DDevice());
 				}
-
+				 if(controls)
+				{
+					menuChange.playSound(L"Sounds\\menuChoice.wav",false);
+					//Load main menu
+					controls = false;
+					menu = true;
+				}
 				//Play menu confirmation sound fx
 				//Change scene using menu index
 				else if(menu && menuOpt == 1)
@@ -270,6 +272,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 					menuChange.playSound(L"Sounds\\menuChoice.wav",false);
 					exit(0);
 				}
+
+				fireCounter++;
 				return 0;
 			}
 			//	StringCchPrintf(szTempOutput, STRSAFE_MAX_CCH, TEXT("Mouse: lLastX=%d lLastY=%d\r\n"), LOWORD(lParam), HIWORD(lParam));
@@ -399,9 +403,6 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLi
 	stage1 = cStage();    //Create stage instance
 	sprintf_s( gScoreStr, 50, "Score: %d", score);    //Update score display
 
-	//============================================background
-	//backPos = D3DXVECTOR3(0,0,0);
-	//background1 = cBackground(clientBounds, backPos, d3dMgr->getTheD3DDevice());
 	//===================================================font
 	cD3DXFont* scoreFont = new cD3DXFont(d3dMgr->getTheD3DDevice(),hInstance, "staravenue"); //Create score font
 
@@ -469,6 +470,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLi
 								menuChange.playSound(L"Sounds\\menuChoice.wav",false);
 								if(menu && menuOpt == 1)
 								{
+									stageMusic.stopSound();
 									//Load game scene
 									stage1.startLevel();
 									menu= false;
@@ -478,6 +480,8 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLi
 									//Load highscore scene
 									menu = false;
 									hScore = true;
+									
+									
 								}
 								else if(menu && menuOpt == 3)
 								{
@@ -519,6 +523,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLi
 						}
 						if(controls)
 						{
+							stageMusic.playSound(L"Sounds\\MenuMusic.wav",false); 
 							//Load main menu
 							controls = false;
 							menu = true;
@@ -548,9 +553,9 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLi
 					if(Player1->GetState().Gamepad.sThumbLX>10000)
 					{
 						if(!menu && !hScore && !newHScore && !lvComp){
-							
+
 							//Check screen collision
-							if( theShip.getSpritePos2D().x < clientBounds.right - 60){
+							if( theShip.getSpritePos2D().x < clientBounds.right - 10){
 								theShip.moveRight();  
 							}
 						}
@@ -582,10 +587,10 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLi
 					//================================
 					if(Player1->GetState().Gamepad.sThumbLX<-10000)
 					{	
-						
+
 						if(!menu && !hScore && !newHScore && !lvComp){
 							//Check screen collision
-							if(theShip.getSpritePos2D().x > clientBounds.left + 60)
+							if(theShip.getSpritePos2D().x > clientBounds.left + 10)
 							{
 								theShip.moveLeft();
 							}
@@ -616,11 +621,11 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLi
 					//================================
 					if(Player1->GetState().Gamepad.sThumbLY>10000)
 					{
-						
+
 						if(!menu && !hScore && !newHScore && !lvComp)
 						{
 							//Check screen collision
-							if(theShip.getSpritePos2D().y >  clientBounds.top + 60)
+							if(theShip.getSpritePos2D().y >  clientBounds.top + 10)
 							{
 								theShip.moveUp();
 							}
@@ -686,7 +691,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLi
 
 						if(!menu && !hScore && !newHScore && !lvComp){
 							//Check screen collision
-							if(theShip.getSpritePos2D().y <  clientBounds.bottom - 60){
+							if(theShip.getSpritePos2D().y <  clientBounds.bottom - 10){
 								theShip.moveDown();}
 						}
 						if(menu)
@@ -750,11 +755,11 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLi
 					}
 					if(deathCounter == 20)
 					{
-						
+
 						stageMusic.stopSound(); //Stop stage music
 						lvComp = true;    //Load level complete scene
 					}
-					
+
 					//========================================================stage title
 					if(titleCounter<100)
 					{
@@ -775,7 +780,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLi
 							stage1.Update(eShips, clientBounds, d3dMgr->getTheD3DDevice());         //Run enemy scripting
 						}
 						else{
-							
+
 							//Load level complete scene
 							lvComp = true;
 						}
@@ -783,16 +788,13 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLi
 
 					theShip.update();       //Update players movement
 
-					//====================================================Background
-					background1.update();
-					//	background2.update();
 
 					//========================================================================
 					//               COLLISIONS                
 					//=======================================================================
 					list<cEnemy*>::iterator index;
 					vector<cShot*>::iterator iter;
-					
+
 
 					//Loop through enemy ships
 					for(index = eShips.begin(); index != eShips.end(); ++index)
@@ -835,16 +837,13 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLi
 					}
 
 
-					
+
 					d3dMgr->beginRender();
 					theBackbuffer = d3dMgr->getTheBackBuffer();
 					d3dMgr->updateTheSurface(aSurface, theBackbuffer);
 					d3dMgr->releaseTheBackbuffer(theBackbuffer);
 
 					d3dxSRMgr->beginDraw();
-
-					//	d3dxSRMgr->setTheTransform(background1.getSpriteTransformMatrix());	
-					//		d3dxSRMgr->drawSprite(background1.getTexture(),&background1.getRect(),NULL,NULL,0xFFFFFFFF);
 
 
 					//=====================================================ship
@@ -921,11 +920,15 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLi
 					//===============================
 					//  RESET FOR NEW GAME
 					//===============================
+			    	gShots.clear();
+					eShips.clear();
 					score = 0;
 					sprintf_s( gScoreStr, 50, "Score: %d", score);
 					theShip.setSpritePos2D(D3DXVECTOR3(100,100,0));
+						
 					showTitle = true;
 					titleCounter = 0;
+					stage1.startLevel();
 					theShip.Respawn();
 
 					//===============================
@@ -944,7 +947,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLi
 				{
 					//Set location for Score display
 					RECT scorePos;
-					SetRect(&scorePos, 50, 10, 700, 500);
+					SetRect(&scorePos, 320, 200, 700, 500);
 					d3dMgr->beginRender();
 					theBackbuffer = d3dMgr->getTheBackBuffer();
 					d3dMgr->updateTheSurface(highScoreScreen, theBackbuffer);
@@ -964,7 +967,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLi
 					highScores->enterName(name, nameI, nameJ, nameK);
 					//Set name psoition
 					RECT scorePos;
-					SetRect(&scorePos, 330, 300, 450, 400);
+					SetRect(&scorePos, 350, 300, 450, 400);
 					d3dMgr->beginRender();
 					theBackbuffer = d3dMgr->getTheBackBuffer();
 					d3dMgr->updateTheSurface(newHighScoreScreen, theBackbuffer);
@@ -981,7 +984,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLi
 					//Update score string
 					sprintf_s( gScoreStr, 50, "%d", score);
 					RECT scorePos;
-					SetRect(&scorePos, 330, 300, 450, 400);
+					SetRect(&scorePos, 330, 260, 450, 400);
 					d3dMgr->beginRender();
 					theBackbuffer = d3dMgr->getTheBackBuffer();
 					d3dMgr->updateTheSurface(levelComplete, theBackbuffer);

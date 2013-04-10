@@ -80,7 +80,7 @@ HRESULT cD3DXFont::createCustomFont(HINSTANCE hInstance, LPCSTR fontName)	// Use
 */
 HRESULT cD3DXFont::createDXFont(LPDIRECT3DDEVICE9 theDevice)	// Create the DX Font based on the custom font
 {
-	mFontDesc.Height = 48;
+	mFontDesc.Height = 30;
 	mFontDesc.Width = 0;
 	mFontDesc.Weight = FW_NORMAL;
 	mFontDesc.MipLevels = 0;
@@ -91,7 +91,7 @@ HRESULT cD3DXFont::createDXFont(LPDIRECT3DDEVICE9 theDevice)	// Create the DX Fo
 	mFontDesc.PitchAndFamily = DEFAULT_PITCH;
 	
 	//mFontDesc.FaceName = "JI Balloon Caps";
-	strcpy_s(mFontDesc.FaceName, 32, "visitor1");
+	strcpy_s(mFontDesc.FaceName, 20, "visitor1");
 
 	if (FAILED(D3DXCreateFontIndirect(theDevice, &mFontDesc, &mFont)))
 	{

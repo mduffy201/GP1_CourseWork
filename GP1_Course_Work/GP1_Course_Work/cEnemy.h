@@ -2,30 +2,23 @@
 #define _CENEMY_H
 #include "cSprite.h"
 #include "cShot.h"
-//#include "GameConstants.h"
+
 
 class cEnemy:public cSprite{
 
 private:
 	int mID;
-	int mPoints;
-	//float mSpeed;
 	bool mActive;
 	eShooter mShooter;
-	D3DXVECTOR3 startPosition;
-	//vector<cShot*> gShots;
 	int rateOfFire;
-	float shipSpeed;
+	float shipSpeed;   
 public:
 	cEnemy();
-	cEnemy(int ID,float speed,int fireRate, D3DXVECTOR3 sPosition, LPDIRECT3DDEVICE9 pd3dDevice);
-	void update(LPDIRECT3DDEVICE9 pd3dDevice, vector<cShot*> &gShots);
-	void fire(LPDIRECT3DDEVICE9 pd3dDevice, vector<cShot*> &gShots);
+	cEnemy(int ID,float speed,int fireRate, D3DXVECTOR3 sPosition, LPDIRECT3DDEVICE9 pd3dDevice);   //Constructor
+	void update(LPDIRECT3DDEVICE9 pd3dDevice, vector<cShot*> &gShots);    //Update emeny position and shots
+	void fire(LPDIRECT3DDEVICE9 pd3dDevice, vector<cShot*> &gShots);  //Add new shot to vector
 	void setActive(bool sActive);			// Set the sprite to active.
-	bool isActive();
-	vector<cShot*>	getShots();
-//	void setRateOfFire(int rate);
-//	void setShipSpeed(float speed);
-//list<cEnemy*> getShips(list<cEnemy*> eShips, RECT clientBounds, LPDIRECT3DDEVICE9 pd3dDevice);
+	bool isActive();    //Check if active
+
 };
 #endif

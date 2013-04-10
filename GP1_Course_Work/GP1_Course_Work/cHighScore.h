@@ -8,17 +8,17 @@
 class cHighScore{
 
 public:
-	cHighScore();
-	int openfile();
-	void getHighScores(char* scoreTable);
+	cHighScore();   //constructor
+	int openfile();    //Open txt file of scores
+	void getHighScores(char* scoreTable);      //Get highscore table for display
 	~cHighScore();					// Destructor
-bool checkScore(int score);
-void enterName(char* name, int &nameI, int &nameJ, int &nameK);
-void UpdateScore(char* name, int score);
+bool checkScore(int score);   //Check players score against collection
+void enterName(char* name, int &nameI, int &nameJ, int &nameK);    //Allows user to enter 3 initials as name
+void UpdateScore(char* name, int score);   //update score collection
 
 private:
-	//void openfile();
-	void saveFile();
-	//string aScores[10];
+	
+	void saveFile();   //Save score collection to file
+	
 };
 #endif
