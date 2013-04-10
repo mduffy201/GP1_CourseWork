@@ -19,6 +19,7 @@ private:
 public:
 	cXAudio();						// Default constructor
 	~cXAudio();						// Default destructor
-	void playSound(LPWSTR theFilename, bool pLoop );		// Play sound
+	void playSound(LPWSTR theFilename, bool pLoop);		// Play sound
+	void stopSound();
 };
 #endif

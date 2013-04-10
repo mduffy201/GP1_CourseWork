@@ -13,6 +13,7 @@ private:
 	float mSpeed;
 	vector<cShot*> gShots;
 	eShooter mShooter;
+	bool bActive;
 public:
 	//constructor
 	cPlayer();
@@ -29,6 +30,8 @@ public:
 	void Draw(cD3DXSpriteMgr* d3dxSRMgr,float dt);
 	vector<cShot*> getShots();
 	void setShots(vector<cShot*> &gShots);
-	
+	void Death();
+	bool isActive();
+	void Respawn();
 };
 #endif

@@ -18,6 +18,7 @@ cPlayer::cPlayer():cSprite()
 	mSpeed = SHIP_SPEED;
 	shipTrans = D3DXVECTOR2(0,0);
 	mShooter = eShooter::PLAYER;
+	bActive = true;
 
 }
 
@@ -30,6 +31,7 @@ cPlayer::cPlayer(D3DXVECTOR3 sPosition, LPDIRECT3DDEVICE9 pd3dDevice): cSprite(s
 	shipTrans = D3DXVECTOR2(0,0);
 	//pd3dDevice = pd3dDevice;
 	mShooter = eShooter::PLAYER;
+	bActive = true;
 }
 void cPlayer::update()
 {
@@ -119,4 +121,14 @@ void cPlayer::setShots(vector<cShot*> &gShots)
 {
 	gShots = gShots;
 }
+	void cPlayer::Death()
+	{
+	bActive = false;
+	}
+	bool cPlayer::isActive()
+	{
+		return bActive;
+	}
+	void cPlayer::Respawn()
+	{}
 
